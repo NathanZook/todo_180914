@@ -32,7 +32,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rack-test
+  rack-test (~> 1.1)
   rspec (~> 3.8)
   sinatra (~> 2.0.4)
 
