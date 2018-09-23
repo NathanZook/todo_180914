@@ -29,7 +29,7 @@ end
 
 cert_dir = File.absolute_path(File.join(dirname, '..', 'cert'))
 
-set :port, 8443
+set :port, ENV['PORT'] || 8443
 set :ssl_certificate, File.join(cert_dir, 'server.crt')
 set :ssl_key, File.join(cert_dir, 'server.key')
 set :show_exceptions, :after_handler
