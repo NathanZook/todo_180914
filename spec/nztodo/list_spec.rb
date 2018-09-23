@@ -37,7 +37,7 @@ module NZTodo
         @list = List.new(id, 'list name', 'list_description', [], @hash, lists)
         allow(Validate).to receive(:fetch).and_return(@list)
       end
-        
+
       after(:example) do
         clear_lists
       end
@@ -54,7 +54,7 @@ module NZTodo
 
     context 'create' do
       include ClearLists
-      
+
       after(:context) do
         clear_lists
       end
@@ -73,7 +73,7 @@ module NZTodo
         id = List.create(data).first
         expect(json_norm(List[id])).to eq(data.merge('id' => id))
       end
-  
+
       it 'issues a uuid for a new list' do
         data = {'name' => 'list 1', 'description' => 'What this list does', 'tasks' => []}
         list_id = List.create(data).first
@@ -85,7 +85,7 @@ module NZTodo
         id = List.create(data).first
         expect(json_norm(List[id])).to eq(data.merge('id' => id, 'description' => '', 'tasks' => []))
       end
-  
+
       it 'validates the data' do
         data = {'name' => 'list 1', 'description' => 'What this list does', 'tasks' => []}
         expect(Validate).to receive(:validate_data).with(data,
@@ -102,7 +102,7 @@ module NZTodo
             "21c8f985-2392-4f23-9f8e-56372762ee5c",
             "4723563b-c9e9-4c33-a9bb-0d254807b853",
           ] }
-        let(:tasks) {tasks_data.zip(task_ids).map do |datum, id| 
+        let(:tasks) {tasks_data.zip(task_ids).map do |datum, id|
             double("task_#{datum['name']}", :id => id, :name => datum['name'])
           end
         }
@@ -120,12 +120,12 @@ module NZTodo
           end
           allow(Validate).to receive(:validate_data)
         end
-      
+
         it 'normalizes the data for each task' do
           tasks_data.each do |datum|
             expect(Task).to receive(:normalize).with(datum)
           end
-        
+
           List.create(list_data)
         end
 
@@ -133,10 +133,10 @@ module NZTodo
           normalized_tasks_data.each do |datum|
             expect(Task).to receive(:build).with(datum, any_args)
           end
-        
+
           List.create(list_data)
         end
-        
+
         it 'attaches the built tasks to the list' do
           id = List.create(list_data).first
           list = List[id]
@@ -154,7 +154,7 @@ module NZTodo
 
       let(:skip) { 3 }
       let(:limit) { 5 }
-      
+
       def json_norm(data)
         JSON.load(data.to_json)
       end
@@ -172,7 +172,7 @@ module NZTodo
       before(:each) do
         allow(Validate).to receive(:validate_data)
       end
-      
+
       after(:context) do
         clear_lists
       end
@@ -192,7 +192,7 @@ module NZTodo
       it 'searches substrings' do
         expect(json_norm(List.list({'search' => 'jkl'}))).to eq(@lists[2,8])
       end
- 
+
       it 'skips and limits with search substrings' do
         params = {'search' => 'jkl', 'skip' => skip.to_s, 'limit' => limit.to_s}
         expect(json_norm(List.list(params))).to eq(@lists[2 + skip, limit])
@@ -221,7 +221,7 @@ module NZTodo
 
     context '#retrieve' do
       let(:list){ List.new('381dbddd-7ab6-4c5c-a09d-2cf03d7b2315', 'list 8', '', [{'name' => 'task 9'}], {}, []) }
-      
+
       before(:each) do
         @task = double('task 9', :id => id)
         allow(Task).to receive(:build) do |data, task_list, task_hash|

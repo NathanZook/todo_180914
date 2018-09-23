@@ -36,7 +36,7 @@ RSpec.describe 'TODO app' do
         end
         list_spec[-1] = tasks_data
       end
-      
+
       %w{name description tasks}.zip(list_spec) do |key, value|
         list_data[key] = value if value != None
       end
@@ -52,7 +52,7 @@ RSpec.describe 'TODO app' do
     end
     [ list_id, data, error ]
   end
-    
+
   def change_hex(string)
     string.tr('0123456789abcdef', '89abcdef01234567')
   end
@@ -143,7 +143,7 @@ RSpec.describe 'TODO app' do
 # Default values for list creation
     get "/list/#{first_list_id}"
     first_list = parse_response(last_response, 200)
-    
+
     expect(first_list['description']).to eq('')
     expect(first_list['tasks'].length).to eq(0)
 

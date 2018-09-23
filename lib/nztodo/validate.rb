@@ -14,12 +14,12 @@ module NZTodo
     include RequestException
     Code = 400
   end
-  
+
   class NotFound < RuntimeError
     include RequestException
     Code = 404
   end
-  
+
   class Conflict < RuntimeError
     include RequestException
     Code = 409
@@ -37,7 +37,7 @@ module NZTodo
 
       def data_type_error_message(key, klass)
         ["Value for #{key} must be a #{klass}"]
-      end 
+      end
 
       def class_check(data, klass, key)
         check_condition(data.is_a?(klass), data_type_error_message(key, klass.name.downcase))

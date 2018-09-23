@@ -12,7 +12,7 @@ module NZTodo
       expect(SecureRandom).to receive(:uuid)
       UUID.new({})
     end
-    
+
     it 'returns the result from SecureRandom.uuid' do
       expect(SecureRandom).to receive(:uuid).and_return(uuid)
       expect(UUID.new({})).to eq(uuid)

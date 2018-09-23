@@ -19,7 +19,7 @@ module NZTodo
           end
           list_spec[-1] = tasks_data
         end
-      
+
         %w{name description tasks}.zip(list_spec) do |key, value|
           list_data[key] = value if value != None
         end
@@ -33,7 +33,7 @@ module NZTodo
       data['completed'] = completed if completed != None
       [ list_id, data, error ]
     end
-    
+
     def change_hex(string)
       string.tr('0123456789abcdef', '89abcdef01234567')
     end

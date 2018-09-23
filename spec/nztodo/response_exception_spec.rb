@@ -5,7 +5,7 @@ module NZTodo
   RSpec.shared_examples "a request exception" do |code|
     let(:message) { "Some string" }
     let(:exception) { described_class.new(message) }
-    
+
     it 'is a runtime error' do
       expect(exception).to be_kind_of(RuntimeError)
     end
@@ -13,7 +13,7 @@ module NZTodo
     it "intializes with the message" do
       expect(exception.message).to eq(message.to_json)
     end
-    
+
     it "has the right code" do
       expect(exception.http_status).to eq(code)
     end

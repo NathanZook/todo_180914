@@ -7,7 +7,7 @@ module NZTodo
     let(:key) {'key'}
     let(:item_id) { 'd94d1929-4d65-4a96-959a-4fffe1aaa83e' }
 
-    # The validate module was built from the bottom up post-spike.  All of the 
+    # The validate module was built from the bottom up post-spike.  All of the
     # tests before validate_arg are repeated in the final tests, but they are
     # left here because they are cheap & might aid debugging.  Any significant
     # refactoring will likely blow these away.
@@ -30,7 +30,7 @@ module NZTodo
         expect{Validate.check_condition(false, message_parts, NotFound)}.to raise_error(NotFound, message_out.to_json)
       end
     end
-    
+
     context 'when check_condition is called with a true condition' do
       let(:message) {'Head'}
 
@@ -43,12 +43,12 @@ module NZTodo
       let(:test_class_name) {'TestClass'}
       let(:test_predicate) {true}
       let(:tail_message) {"must be a #{test_class_name.downcase}"}
-      
+
       before do
         @test_Validate = double("test Validate", :is_a? => test_predicate)
         @test_class = instance_double("Class", :name => test_class_name)
       end
-    
+
       it 'calls is_a? on the Validate with the class' do
         expect(@test_Validate).to receive(:is_a?).with(@test_class)
         Validate.class_check(@test_Validate, @test_class, key)
@@ -67,7 +67,7 @@ module NZTodo
         expect(Validate).to receive(:check_condition).with(true, ["Value for #{key} must be a boolean"])
         Validate.check_bool(true, key)
       end
-      
+
       it 'calls check_condition with "true", the key, and a sensible message when passed "false" and a key' do
         expect(Validate).to receive(:check_condition).with(true, ["Value for #{key} must be a boolean"])
         Validate.check_bool(false, key)
@@ -118,7 +118,7 @@ module NZTodo
       it 'fails if there are missing keys' do
         data = {}
         expect{Validate.validate_form(data, argspecs)}.to raise_error(BadRequest, "Missing required key(s): a b.".to_json)
-      end      
+      end
     end
 
     context 'when validate_arg is called' do
@@ -154,7 +154,7 @@ module NZTodo
             expect{Validate.validate_arg(value, key, :uint32_string)}.to raise_error(BadRequest, message)
           end
         end
-        
+
         [
           ['0', '0'],
           ['MAX_UINT32', ((1 << 32) - 1).to_s],
@@ -200,7 +200,7 @@ module NZTodo
 
 
       #WARNING:  This definition will NOT decend into nested contexts.  If this becomes needed, pull into a module
-      
+
       it 'is happy when all is good' do
         expect{Validate.validate_data(data, spec)}.to_not raise_error
       end
@@ -235,5 +235,5 @@ module NZTodo
     end
   end
 end
-  
-  
+
+

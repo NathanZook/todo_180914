@@ -4,7 +4,7 @@ module NZTodo
   class List ; end
   module Validate ; end
   module UUID ; end
-  
+
 
   RSpec.describe Task do
 
@@ -128,9 +128,9 @@ module NZTodo
 
       it 'retrieves the task from the list by its id' do
         expect(@list).to receive(:retrieve).with(id)
-        Task.complete(list_id, id, completed_data)        
+        Task.complete(list_id, id, completed_data)
       end
-      
+
       it 'validates the data' do
         expect(Validate).to receive(:validate_data).with(completed_data, {'completed' => :bool})
         Task.complete(list_id, id, completed_data)

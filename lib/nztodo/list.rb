@@ -2,7 +2,7 @@ module NZTodo
   class List
     @lists = {}
     @lists_list = []
- 
+
     class << self
       def exists?(id)
         @lists.has_key?(id)
