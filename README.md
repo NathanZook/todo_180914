@@ -15,5 +15,5 @@ The differences between the APIs should be as follows:
 1. I have changed the response code on item creation to 201, and the response body to the id(s) of the created things.
 1. I have added a /test endpoint that will run the specs, and return the results.
 
-Container responds on port 443 with a self-signed cert.
+Container responds on port 8443 with a self-signed cert.
 
