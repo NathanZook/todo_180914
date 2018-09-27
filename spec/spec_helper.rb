@@ -98,3 +98,10 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 end
 
+module SetExampleName
+  def set_example_name(name)
+    metadata = @example.metadata
+    metadata[:full_description] = metadata[:example_group][:description] + ' ' + name
+    metadata[:description] = name
+  end
+end
